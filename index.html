@@ -1,0 +1,951 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Owen Enock Nyamaropa — Creative Technologist & Founder</title>
+    <meta name="description" content="Owen Enock Nyamaropa — Web Developer, Graphic Designer, Startup Founder. Building digital experiences, creative brands, and innovative communities." />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@300;400;600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root{
+            --primary:#535C91;
+            --bg:#070F2B;
+            --muted:#9aa0c6;
+            --accent:#FFFFFF;
+            --glass: rgba(255,255,255,0.06);
+            --glass-2: rgba(255,255,255,0.03);
+            --card:#0b1330;
+            --glow: 0 8px 40px rgba(83,92,145,0.18);
+            --transition: 450ms cubic-bezier(.2,.9,.2,1);
+        }
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{
+            margin:0;
+            font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+            color:var(--accent);
+            background:linear-gradient(180deg,#050716 0%, #07102a 40%, #0b1227 100%);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+            overflow-x:hidden;
+        }
+
+        /* GLOBAL LAYOUT */
+        .container{max-width:1200px;margin:0 auto;padding:0 28px}
+        header{position:fixed;inset:20px 28px auto 28px;z-index:60;backdrop-filter: blur(8px);}
+        nav{
+            display:flex;align-items:center;justify-content:space-between;
+            background:linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+            border-radius:14px;padding:10px 16px;box-shadow:var(--glow);
+            min-width:320px;
+        }
+        .brand{display:flex;align-items:center;gap:12px}
+        .logo{
+            height:44px;width:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary) 0%, #7a6fe5 100%);
+            display:flex;align-items:center;justify-content:center;font-weight:800;font-family:Montserrat;
+            box-shadow:0 6px 30px rgba(83,92,145,0.18);
+        }
+        .brand .name{font-family:Montserrat;font-weight:700;font-size:14px;color:rgba(255,255,255,0.95)}
+        .nav-links{display:flex;gap:14px;align-items:center}
+        .nav-links a{
+            color:var(--accent);text-decoration:none;padding:8px 12px;border-radius:8px;font-weight:600;font-size:13px;opacity:0.9;
+            transition:var(--transition);
+        }
+        .nav-links a:hover{transform:translateY(-3px);opacity:1;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02))}
+        .nav-links a.active{background:linear-gradient(90deg,var(--primary),#7a6fe5);color:#fff;box-shadow:var(--glow)}
+        .controls{display:flex;gap:8px;align-items:center}
+        .icon-btn{
+            height:40px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+            background:transparent;color:var(--accent);display:inline-flex;align-items:center;gap:8px;cursor:pointer;
+            transition:var(--transition)
+        }
+        .icon-btn:hover{transform:translateY(-3px)}
+        .hamburger{display:none;background:transparent;border:0;color:var(--accent);font-size:22px;padding:8px}
+
+        /* HERO */
+        .hero{
+            position:relative;min-height:100vh;padding-top:90px;display:flex;align-items:center;
+        }
+        .bg-visual{
+            position:absolute;inset:0;z-index:0;overflow:hidden;
+            background:radial-gradient(1200px 600px at 15% 20%, rgba(83,92,145,0.12), transparent 10%),
+                                 radial-gradient(900px 400px at 85% 70%, rgba(122,111,229,0.06), transparent 15%);
+        }
+        /* canvas particles */
+        canvas#particles{position:absolute;inset:0;z-index:0;mix-blend-mode: screen;opacity:0.9}
+        .hero-inner{position:relative;z-index:2;display:flex;align-items:center;gap:48px}
+        .hero-left{flex:1;max-width:720px}
+        .eyebrow{font-size:13px;color:var(--muted);margin-bottom:14px;display:flex;gap:10px;align-items:center}
+        .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--primary);box-shadow:0 0 18px rgba(83,92,145,0.6)}
+        h1{font-family:Montserrat;font-weight:800;font-size:52px;line-height:1;letter-spacing:-1px;margin:0 0 10px}
+        .subtitle{font-family:Poppins;font-weight:600;color:var(--primary);font-size:18px;opacity:0.98}
+        .intro{margin-top:18px;color:var(--muted);font-size:16px;max-width:64ch}
+        .hero-ctas{margin-top:24px;display:flex;gap:12px;align-items:center}
+        .btn{
+            padding:12px 18px;border-radius:12px;font-weight:700;cursor:pointer;border:0;background:linear-gradient(90deg,var(--primary),#7a6fe5);
+            color:#fff;box-shadow:var(--glow);transition:var(--transition);display:inline-flex;gap:10px;align-items:center
+        }
+        .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent);font-weight:700}
+        .btn.ghost{background:transparent;border:1px dashed rgba(255,255,255,0.04)}
+        .socials{display:flex;gap:10px;margin-top:28px}
+        .socials a{width:44px;height:44px;border-radius:10px;background:var(--glass);display:inline-grid;place-items:center;color:var(--accent);text-decoration:none;border:1px solid rgba(255,255,255,0.03)}
+        .scroll-indicator{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);z-index:10;opacity:0.9}
+        .scroll-indicator .mouse{width:36px;height:56px;border-radius:20px;border:2px solid rgba(255,255,255,0.08);display:flex;align-items:flex-start;justify-content:center;padding-top:8px}
+        .scroll-indicator .wheel{width:6px;height:6px;background:var(--primary);border-radius:3px;animation:wheel 1.6s infinite}
+        @keyframes wheel{0%{transform:translateY(0)}50%{transform:translateY(10px)}100%{transform:translateY(0)}}
+
+        .hero-right{width:420px;display:flex;align-items:center;justify-content:center;position:relative}
+        .device {
+            width:360px;height:520px;border-radius:22px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border:1px solid rgba(255,255,255,0.04);box-shadow:var(--glow);padding:18px;position:relative;overflow:hidden
+        }
+        .device .screen{background:linear-gradient(180deg,#06102a, #08102f);border-radius:12px;height:100%;display:flex;flex-direction:column;gap:12px;padding:14px}
+        .app-card{background:linear-gradient(90deg, rgba(83,92,145,0.12), rgba(122,111,229,0.06));border-radius:12px;padding:12px;color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,0.02)}
+        .app-bar{display:flex;align-items:center;gap:8px}
+        .dot{width:10px;height:10px;border-radius:50%;background:#ff6b6b;box-shadow:0 0 8px rgba(255,107,107,0.12)}
+        .card-lines{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+        .line{height:8px;background:linear-gradient(90deg,#2b3356,#1b2344);border-radius:6px;width:100%}
+        .line.short{width:60%}
+
+        /* SECTIONS */
+        section{padding:96px 0;position:relative;z-index:1}
+        .section-title{display:flex;align-items:center;gap:16px;margin-bottom:28px}
+        .section-title h2{font-family:Montserrat;font-size:22px;margin:0}
+        .section-sub{color:var(--muted);font-size:14px}
+
+        /* ABOUT */
+        .about{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:start}
+        .about .profile{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:16px;border:1px solid rgba(255,255,255,0.03);
+            display:flex;flex-direction:column;gap:12px;align-items:center;box-shadow:var(--glow)
+        }
+        .avatar{width:320px;height:320px;border-radius:16px;background:linear-gradient(135deg,#0f1a40 0%, #122043 100%);display:grid;place-items:center;font-family:Montserrat;font-weight:700;font-size:20px;color:var(--muted)}
+        .stats{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+        .stat{background:var(--glass);padding:12px;border-radius:12px;min-width:120px;text-align:center;border:1px solid rgba(255,255,255,0.02)}
+        .stat strong{display:block;font-size:20px;color:var(--primary);font-family:Montserrat}
+        .timeline{background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+        .timeline-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+        .timeline-dot{width:12px;height:12px;border-radius:50%;background:var(--primary);margin-top:6px}
+        .timeline-content{color:var(--muted);font-size:14px}
+        .about .lead{font-size:15px;color:var(--muted);line-height:1.6}
+        /* SKILLS */
+        .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+        .skill-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+        .skill-card h3{font-family:Montserrat;margin:0 0 8px;font-size:15px}
+        .skill{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+        .progress{width:65%;height:8px;background:linear-gradient(90deg,#0b1330,#0a162b);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,0.02)}
+        .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--primary),#7a6fe5);border-radius:999px;width:0%;transition:width 900ms cubic-bezier(.2,.9,.2,1)}
+        .skill-icon{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.02);display:grid;place-items:center;margin-right:12px}
+
+        /* PROJECTS */
+        .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .project-card{position:relative;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 40px rgba(3,6,23,0.45)}
+        .project-thumb{height:200px;background:linear-gradient(135deg, rgba(83,92,145,0.12), rgba(122,111,229,0.06));display:grid;place-items:center}
+        .project-body{padding:14px}
+        .tech{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+        .chip{background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;font-size:12px;border:1px solid rgba(255,255,255,0.02)}
+
+        /* STARTUPS */
+        .startup-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+        .startup{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03)}
+
+        /* EXPERIENCE */
+        .exp-timeline{border-left:2px solid rgba(255,255,255,0.03);padding-left:24px}
+        .exp-item{position:relative;margin-bottom:28px;padding-left:18px}
+        .exp-item::before{content:'';position:absolute;left:-36px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--primary);box-shadow:0 6px 20px rgba(83,92,145,0.18)}
+        .exp-item h4{margin:0 0 6px;font-family:Montserrat;font-size:15px}
+        .exp-item p{margin:0;color:var(--muted);font-size:14px}
+
+        /* GALLERY */
+        .gallery{column-count:3;column-gap:14px}
+        .g-item{break-inside:avoid;margin-bottom:14px;border-radius:10px;overflow:hidden;position:relative}
+        .g-item img{width:100%;display:block;height:auto;transition:transform 350ms}
+        .g-item:hover img{transform:scale(1.05)}
+        .filter-bar{display:flex;gap:8px;margin-bottom:12px}
+
+        /* TESTIMONIALS */
+        .testimonials{display:flex;overflow:hidden;position:relative}
+        .test-slide{min-width:100%;transition:transform 600ms cubic-bezier(.2,.9,.2,1);display:flex;gap:12px}
+        .testimonial{background:var(--glass);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-width:320px;box-shadow:var(--glow)}
+
+        /* CONTACT */
+        .contact-grid{display:grid;grid-template-columns:1fr 420px;gap:28px}
+        .contact-card{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03)}
+        form .field{display:flex;flex-direction:column;margin-bottom:12px}
+        input,textarea{background:#07102a;border:1px solid rgba(255,255,255,0.03);padding:12px;border-radius:8px;color:var(--accent);resize:vertical}
+        .send-btn{background:linear-gradient(90deg,var(--primary),#7a6fe5);padding:12px;border-radius:10px;border:0;color:#fff;font-weight:700;cursor:pointer;display:inline-flex;gap:10px;align-items:center}
+        .sent{background:linear-gradient(90deg,#2ecc71,#1abc9c)}
+
+        footer{padding:36px 0;border-top:1px solid rgba(255,255,255,0.02);margin-top:36px}
+        footer .foot-grid{display:flex;justify-content:space-between;align-items:center;gap:12px}
+
+        /* RESPONSIVE */
+        @media (max-width:1024px){
+            .projects-grid{grid-template-columns:repeat(2,1fr)}
+            .skills-grid{grid-template-columns:repeat(2,1fr)}
+            .about{grid-template-columns:1fr 360px}
+        }
+        @media (max-width:820px){
+            header{left:12px;right:12px}
+            .nav-links{display:none}
+            .hamburger{display:block}
+            .hero-inner{flex-direction:column;align-items:flex-start;padding:80px 28px}
+            .hero-right{width:100%}
+            .about{grid-template-columns:1fr}
+            .contact-grid{grid-template-columns:1fr}
+            .projects-grid{grid-template-columns:1fr}
+            .skills-grid{grid-template-columns:1fr}
+            .gallery{column-count:2}
+            .testimonials{overflow:hidden}
+        }
+        @media (max-width:480px){
+            h1{font-size:36px}
+            .gallery{column-count:1}
+        }
+
+        /* small interactions */
+        .fade-up{opacity:0;transform:translateY(12px);transition:opacity 600ms var(--transition), transform 600ms var(--transition)}
+        .in-view{opacity:1;transform:none}
+        /* cursor */
+        .cursor {
+            position:fixed;left:0;top:0;width:42px;height:42px;border-radius:50%;pointer-events:none;z-index:9999;
+            transform:translate(-50%,-50%);mix-blend-mode:screen;background:radial-gradient(circle at 30% 30%, rgba(122,111,229,0.18), rgba(83,92,145,0.08));
+            transition:width 200ms,height 200ms,opacity 200ms, transform 100ms;
+            border:1px solid rgba(255,255,255,0.06);
+            backdrop-filter: blur(4px);
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor" id="cursor"></div>
+
+    <header>
+        <div class="container">
+            <nav role="navigation" aria-label="Main navigation">
+                <div class="brand">
+                    <div class="logo" aria-hidden>OE</div>
+                    <div>
+                        <div class="name">Owen Enock Nyamaropa</div>
+                        <div style="font-size:11px;color:var(--muted);margin-top:2px">Creative Technologist • Founder</div>
+                    </div>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a href="#home" class="nav-link active">Home</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#startups" class="nav-link">Startups</a>
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <div class="controls">
+                    <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">🌗</button>
+                    <button class="hamburger" id="menuBtn" aria-expanded="false" aria-label="Menu">☰</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section id="home" class="hero">
+            <div class="bg-visual" aria-hidden>
+                <canvas id="particles"></canvas>
+            </div>
+            <div class="container hero-inner">
+                <div class="hero-left">
+                    <div class="eyebrow fade-up" style="transition-delay:120ms">
+                        <span class="dot" aria-hidden></span>
+                        <span style="font-weight:700;color:var(--muted)">SVIET College • Computer Science</span>
+                    </div>
+                    <h1 class="fade-up" style="transition-delay:180ms">Owen Enock Nyamaropa</h1>
+                    <div class="subtitle fade-up" style="transition-delay:240ms" id="typingSub">Web Developer • Graphic Designer • Startup Founder</div>
+                    <p class="intro fade-up" style="transition-delay:300ms">Building digital experiences, creative brands, and innovative communities through technology and design.</p>
+
+                    <div class="hero-ctas fade-up" style="transition-delay:360ms">
+                        <button class="btn" data-scroll="#projects">View My Work</button>
+                        <button class="btn secondary" data-scroll="#contact">Contact Me</button>
+                        <a class="btn ghost" href="#" id="downloadCV" download="Owen_Nyamaropa_CV.pdf">Download CV</a>
+                    </div>
+
+                    <div class="socials fade-up" style="transition-delay:420ms" role="list">
+                        <a href="#" title="GitHub" aria-label="GitHub" role="listitem">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 2C7.58 2 4 5.58 4 10c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.2 1.87.86 2.33.66.07-.52.28-.86.51-1.06-1.78-.2-3.64-.89-3.64-3.96 0-.88.31-1.6.82-2.17-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.57.82 1.29.82 2.17 0 3.07-1.87 3.76-3.65 3.96.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38C17.71 16.53 20 13.54 20 10c0-4.42-3.58-8-8-8z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="#" title="LinkedIn" aria-label="LinkedIn" role="listitem">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M4.98 3.5A2.5 2.5 0 1 0 4.98 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM9 9h3.7v1.6h.1c.5-.95 1.9-1.95 3.9-1.95 4.2 0 5 2.75 5 6.3V21h-4v-5.1c0-1.2 0-2.8-1.7-2.8-1.7 0-2 1.4-2 2.7V21H9z" fill="currentColor"/></svg>
+                        </a>
+                        <a href="#" title="Behance" aria-label="Behance" role="listitem">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M2 5h20v14H2z" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+                        </a>
+                        <a href="#" title="Instagram" aria-label="Instagram" role="listitem">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.2"/></svg>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="hero-right fade-up" style="transition-delay:360ms">
+                    <div class="device" role="img" aria-label="Interactive device preview">
+                        <div class="screen">
+                            <div class="app-card">
+                                <div class="app-bar">
+                                    <div class="dot"></div>
+                                    <div style="flex:1">
+                                        <div style="height:10px;background:linear-gradient(90deg,#1b2344,#2b3356);border-radius:6px; width:40%;"></div>
+                                    </div>
+                                </div>
+                                <div class="card-lines">
+                                    <div class="line"></div>
+                                    <div class="line short"></div>
+                                    <div class="line"></div>
+                                    <div class="line short"></div>
+                                </div>
+                            </div>
+
+                            <div style="height:12px"></div>
+
+                            <div class="app-card" style="display:flex;gap:10px;align-items:center">
+                                <div style="width:60px;height:60px;border-radius:12px;background:linear-gradient(90deg,var(--primary),#7a6fe5);display:grid;place-items:center;font-weight:800">I</div>
+                                <div>
+                                    <div style="font-family:Montserrat;font-size:13px">InterVents</div>
+                                    <div style="color:var(--muted);font-size:12px">Innovation community</div>
+                                </div>
+                            </div>
+
+                            <div style="flex:1"></div>
+
+                            <div style="display:flex;gap:8px;align-items:center">
+                                <div style="flex:1;height:8px;background:linear-gradient(90deg,#192041,#14223a);border-radius:999px"></div>
+                                <div style="width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.02)"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator" aria-hidden>
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="fade-up">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About</h2>
+                    <div class="section-sub">Story, skills, and professional journey</div>
+                </div>
+
+                <div class="about">
+                    <div>
+                        <p class="lead">I’m a Computer Science student at SVIET College, founder of InterVents and a creative technologist building meaningful digital products, visual identities, and community-driven ventures. Passionate about cybersecurity, startups, design, and innovation — I blend technical depth with refined visual storytelling to ship polished experiences.</p>
+
+                        <div style="height:18px"></div>
+
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-dot" aria-hidden></div>
+                                <div class="timeline-content"><strong>2024</strong> — Founded InterVents: a student innovation community focusing on robotics, design sprints and cross-border collaboration.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot" aria-hidden></div>
+                                <div class="timeline-content"><strong>2023</strong> — Launched AccomLib: prototype accommodation marketplace for students and landlords.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-dot" aria-hidden></div>
+                                <div class="timeline-content"><strong>2022</strong> — Freelance design & dev: posters, branding, UI concepts, and motion edits for local startups.</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <aside class="profile" aria-hidden>
+                        <div class="avatar" role="img" aria-label="Portrait placeholder">Owen Enock<br><span style="font-size:12px;color:var(--muted);font-weight:600">Creative Technologist</span></div>
+
+                        <div class="stats" aria-hidden>
+                            <div class="stat">
+                                <strong class="counter" data-target="28">0</strong>
+                                <div style="font-size:12px;color:var(--muted)">Projects Completed</div>
+                            </div>
+                            <div class="stat">
+                                <strong class="counter" data-target="3">0</strong>
+                                <div style="font-size:12px;color:var(--muted)">Startups Founded</div>
+                            </div>
+                            <div class="stat">
+                                <strong class="counter" data-target="6">0</strong>
+                                <div style="font-size:12px;color:var(--muted)">Years Design Exp</div>
+                            </div>
+                            <div class="stat">
+                                <strong class="counter" data-target="5">0</strong>
+                                <div style="font-size:12px;color:var(--muted)">Leadership Roles</div>
+                            </div>
+                        </div>
+
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Skills</h2>
+                    <div class="section-sub">Web, design, and technical interests</div>
+                </div>
+
+                <div class="skills-grid fade-up">
+                    <div class="skill-card">
+                        <h3>Web Development</h3>
+                        <div style="height:8px"></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">H5</div><div>HTML5</div></div><div class="progress"><i data-value="95"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">C3</div><div>CSS3</div></div><div class="progress"><i data-value="92"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">JS</div><div>JavaScript</div></div><div class="progress"><i data-value="88"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">R</div><div>Responsive</div></div><div class="progress"><i data-value="90"></i></div></div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Graphic Design & Media</h3>
+                        <div style="height:8px"></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">PS</div><div>Photoshop</div></div><div class="progress"><i data-value="90"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">AI</div><div>Illustrator</div></div><div class="progress"><i data-value="87"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">PR</div><div>Premiere</div></div><div class="progress"><i data-value="80"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">3D</div><div>Blender</div></div><div class="progress"><i data-value="72"></i></div></div>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Technical Interests</h3>
+                        <p style="color:var(--muted);font-size:14px">Cybersecurity, Robotics, Startup Development, Community Building</p>
+                        <div style="height:8px"></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">CY</div><div>Cybersecurity</div></div><div class="progress"><i data-value="65"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">RB</div><div>Robotics</div></div><div class="progress"><i data-value="70"></i></div></div>
+                        <div class="skill"><div style="display:flex;align-items:center"><div class="skill-icon">ST</div><div>Startups</div></div><div class="progress"><i data-value="85"></i></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Projects</h2>
+                    <div class="section-sub">Featured work — products, brands, and experiments</div>
+                </div>
+
+                <div class="projects-grid fade-up">
+                    <article class="project-card" data-title="InterVents">
+                        <div class="project-thumb" aria-hidden>
+                            <svg width="180" height="120" viewBox="0 0 200 120" aria-hidden><rect width="200" height="120" rx="10" fill="#0b1330"/></svg>
+                            <div style="position:absolute;color:var(--muted);font-weight:700">InterVents</div>
+                        </div>
+                        <div class="project-body">
+                            <h3>InterVents</h3>
+                            <p style="color:var(--muted);font-size:14px">A student innovation community empowering international students through tech, robotics, and design.</p>
+                            <div class="tech">
+                                <span class="chip">React</span><span class="chip">Node</span><span class="chip">Figma</span>
+                            </div>
+                            <div style="height:12px"></div>
+                            <div style="display:flex;gap:8px">
+                                <button class="btn" data-demo="#">Live Demo</button>
+                                <button class="btn secondary" data-repo="#">GitHub Repo</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-title="AccomLib">
+                        <div class="project-thumb"><div style="color:var(--muted)">AccomLib</div></div>
+                        <div class="project-body">
+                            <h3>AccomLib</h3>
+                            <p style="color:var(--muted);font-size:14px">Rental accommodation platform connecting students, landlords and moving services.</p>
+                            <div class="tech"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span></div>
+                            <div style="height:12px"></div>
+                            <div style="display:flex;gap:8px">
+                                <button class="btn" data-demo="#">Live Demo</button>
+                                <button class="btn secondary" data-repo="#">GitHub Repo</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-title="Royale Rootz">
+                        <div class="project-thumb"><div style="color:var(--muted)">Royale Rootz</div></div>
+                        <div class="project-body">
+                            <h3>Royale Rootz</h3>
+                            <p style="color:var(--muted);font-size:14px">A premium culturally inspired salon and grooming brand.</p>
+                            <div class="tech"><span class="chip">Branding</span><span class="chip">Illustration</span></div>
+                            <div style="height:12px"></div>
+                            <div style="display:flex;gap:8px">
+                                <button class="btn" data-demo="#">Brand Site</button>
+                                <button class="btn secondary" data-repo="#">Design Files</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-title="Fork&Fun">
+                        <div class="project-thumb"><div style="color:var(--muted)">Fork&Fun</div></div>
+                        <div class="project-body">
+                            <h3>Fork&Fun Restaurant</h3>
+                            <p style="color:var(--muted);font-size:14px">Southern African cuisine startup aimed at students and campus communities.</p>
+                            <div class="tech"><span class="chip">Brand Strategy</span><span class="chip">UI</span></div>
+                            <div style="height:12px"></div>
+                            <div style="display:flex;gap:8px">
+                                <button class="btn" data-demo="#">Discover</button>
+                                <button class="btn secondary" data-repo="#">Assets</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card" data-title="Creative Designs">
+                        <div class="project-thumb"><div style="color:var(--muted)">Design Projects</div></div>
+                        <div class="project-body">
+                            <h3>Creative Design Projects</h3>
+                            <p style="color:var(--muted);font-size:14px">Posters, branding concepts, UI/UX designs, social media campaigns and motion pieces.</p>
+                            <div class="tech"><span class="chip">PS</span><span class="chip">AI</span><span class="chip">PR</span></div>
+                            <div style="height:12px"></div>
+                            <div style="display:flex;gap:8px">
+                                <button class="btn" data-demo="#">View Gallery</button>
+                                <button class="btn secondary" data-repo="#">Download Kit</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- STARTUPS & LEADERSHIP -->
+        <section id="startups">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Startups & Leadership</h2>
+                    <div class="section-sub">Founder-led projects and leadership ethos</div>
+                </div>
+
+                <div class="startup-cards fade-up">
+                    <div class="startup">
+                        <h3>InterVents</h3>
+                        <p style="color:var(--muted)">Mission: Empower international students to build, learn, and launch through mentorship, workshops and hardware labs.</p>
+                        <div style="height:10px"></div>
+                        <div style="display:flex;gap:8px">
+                            <span class="chip">Community</span><span class="chip">Robotics</span><span class="chip">Workshops</span>
+                        </div>
+                        <div style="height:12px"></div>
+                        <strong style="color:var(--primary)">Roadmap</strong>
+                        <ul style="color:var(--muted);margin:8px 0 0 18px">
+                            <li>Regional hackathons</li>
+                            <li>Industry partnerships</li>
+                            <li>Hardware residency</li>
+                        </ul>
+                    </div>
+
+                    <div class="startup">
+                        <h3>AccomLib</h3>
+                        <p style="color:var(--muted)">Problem: Student housing discovery is fragmented. Solution: Streamlined listings, verification, and moving services.</p>
+                        <div style="height:10px"></div>
+                        <div style="display:flex;gap:8px">
+                            <span class="chip">Market Research</span><span class="chip">MVP</span>
+                        </div>
+                        <div style="height:12px"></div>
+                        <strong style="color:var(--primary)">Impact</strong>
+                        <p style="color:var(--muted);margin:8px 0 0">Reduced time-to-occupancy for students and increased trust between tenants and landlords.</p>
+                    </div>
+
+                    <div class="startup">
+                        <h3>Royale Rootz</h3>
+                        <p style="color:var(--muted)">Brand-first salon focusing on elevated cultural identity and premium service design.</p>
+                    </div>
+
+                    <div class="startup">
+                        <h3>Fork&Fun</h3>
+                        <p style="color:var(--muted)">Campus-first restaurant concept: local cuisine, student ambassadors, and subscription meal plans.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Experience</h2>
+                    <div class="section-sub">Roles, collaborations, and milestones</div>
+                </div>
+
+                <div class="exp-timeline fade-up">
+                    <div class="exp-item">
+                        <h4>Founder — InterVents</h4>
+                        <p>Leading student innovation programs, organizing workshops, building partnerships and mentoring teams.</p>
+                    </div>
+                    <div class="exp-item">
+                        <h4>Product Designer / Frontend — Freelance</h4>
+                        <p>Design systems, responsive frontends, and brand identities for startups and local businesses.</p>
+                    </div>
+                    <div class="exp-item">
+                        <h4>Community Lead — Campus Tech Club</h4>
+                        <p>Organized events, hackathons, and mentorship programs connecting students to industry projects.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section id="gallery">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Gallery</h2>
+                    <div class="section-sub">A selection of designs, illustrations and experiments</div>
+                </div>
+
+                <div class="filter-bar fade-up">
+                    <button class="icon-btn" data-filter="*">All</button>
+                    <button class="icon-btn" data-filter="design">Design</button>
+                    <button class="icon-btn" data-filter="branding">Branding</button>
+                    <button class="icon-btn" data-filter="illustration">Illustration</button>
+                </div>
+
+                <div class="gallery fade-up" id="galleryGrid">
+                    <div class="g-item" data-cat="design"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400'><rect width='100%' height='100%' fill='%230b1330'/><text x='50%' y='50%' fill='%239aa0c6' font-size='24' font-family='Montserrat' text-anchor='middle'>Poster Design</text></svg>" alt="Poster design" loading="lazy"></div>
+                    <div class="g-item" data-cat="branding"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='460' height='300'><rect width='100%' height='100%' fill='%230b1330'/><text x='50%' y='50%' fill='%239aa0c6' font-size='24' font-family='Montserrat' text-anchor='middle'>Branding Concept</text></svg>" alt="Branding" loading="lazy"></div>
+                    <div class="g-item" data-cat="illustration"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='420' height='360'><rect width='100%' height='100%' fill='%230b1330'/><text x='50%' y='50%' fill='%239aa0c6' font-size='24' font-family='Montserrat' text-anchor='middle'>Illustration</text></svg>" alt="Illustration" loading="lazy"></div>
+                    <div class="g-item" data-cat="design"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='360'><rect width='100%' height='100%' fill='%230b1330'/><text x='50%' y='50%' fill='%239aa0c6' font-size='24' font-family='Montserrat' text-anchor='middle'>UI Concept</text></svg>" alt="UI Concept" loading="lazy"></div>
+                    <div class="g-item" data-cat="branding"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='520' height='300'><rect width='100%' height='100%' fill='%230b1330'/><text x='50%' y='50%' fill='%239aa0c6' font-size='24' font-family='Montserrat' text-anchor='middle'>Identity System</text></svg>" alt="Identity" loading="lazy"></div>
+                    <div class="g-item" data-cat="illustration"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='480' height='340'><rect width='100%' height='100%' fill='%230b1330'/><text x='50%' y='50%' fill='%239aa0c6' font-size='24' font-family='Montserrat' text-anchor='middle'>Motion Study</text></svg>" alt="Motion" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section id="testimonials">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Testimonials</h2>
+                    <div class="section-sub">What collaborators and clients say</div>
+                </div>
+
+                <div class="testimonials fade-up" id="testSlider">
+                    <div class="test-slide">
+                        <div class="testimonial">
+                            <strong>“Owen delivers work with vision and precision. He helped our product stand out.”</strong>
+                            <p style="color:var(--muted);margin-top:8px">— Product Manager, Local Startup</p>
+                        </div>
+                        <div class="testimonial">
+                            <strong>“A leader who brings people together — outstanding at organizing events and mentorship.”</strong>
+                            <p style="color:var(--muted);margin-top:8px">— Community Partner</p>
+                        </div>
+                    </div>
+
+                    <div class="test-slide">
+                        <div class="testimonial">
+                            <strong>“Creative and technically sound. The brand system he designed elevated our presence.”</strong>
+                            <p style="color:var(--muted);margin-top:8px">— Founder, Royale Rootz</p>
+                        </div>
+                        <div class="testimonial">
+                            <strong>“Reliable, fast, and with great taste — recommended for ambitious projects.”</strong>
+                            <p style="color:var(--muted);margin-top:8px">— Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Contact</h2>
+                    <div class="section-sub">Let’s create something meaningful</div>
+                </div>
+
+                <div class="contact-grid">
+                    <div class="contact-card fade-up">
+                        <form id="contactForm" novalidate>
+                            <div class="field">
+                                <label for="name" style="font-size:13px;color:var(--muted)">Name</label>
+                                <input id="name" name="name" required placeholder="Your name">
+                            </div>
+                            <div class="field">
+                                <label for="email" style="font-size:13px;color:var(--muted)">Email</label>
+                                <input id="email" name="email" type="email" required placeholder="you@domain.com">
+                            </div>
+                            <div class="field">
+                                <label for="message" style="font-size:13px;color:var(--muted)">Message</label>
+                                <textarea id="message" name="message" rows="6" required placeholder="Tell me about your project..."></textarea>
+                            </div>
+                            <div style="display:flex;gap:12px;align-items:center">
+                                <button class="send-btn" type="submit"><span id="sendLabel">Send Message</span></button>
+                                <div style="color:var(--muted);font-size:13px">or email: <a href="mailto:owen@example.com" style="color:var(--primary)">owen@example.com</a></div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <aside class="contact-card fade-up" aria-hidden>
+                        <h3 style="margin-top:0">Get in touch</h3>
+                        <p style="color:var(--muted)">Phone: +263 000 0000<br>Location: Harare, Zimbabwe</p>
+                        <div style="height:12px"></div>
+                        <strong style="color:var(--primary)">Availability</strong>
+                        <p style="color:var(--muted);margin-top:8px">Open to freelance, collaboration, and founding opportunities.</p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="container">
+                <div class="foot-grid">
+                    <div style="display:flex;gap:12px;align-items:center">
+                        <div class="logo" aria-hidden style="width:44px;height:44px">OE</div>
+                        <div>
+                            <div style="font-weight:700">Owen Enock Nyamaropa</div>
+                            <div style="color:var(--muted);font-size:13px">Creative Technologist • Founder</div>
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:18px;align-items:center;color:var(--muted)">
+                        <nav style="display:flex;gap:12px">
+                            <a href="#home" class="nav-link" style="color:var(--muted);text-decoration:none">Home</a>
+                            <a href="#projects" class="nav-link" style="color:var(--muted);text-decoration:none">Work</a>
+                            <a href="#contact" class="nav-link" style="color:var(--muted);text-decoration:none">Contact</a>
+                        </nav>
+                        <div style="color:var(--muted)">© <span id="year"></span> Owen Enock Nyamaropa</div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <div id="modal" aria-hidden style="position:fixed;inset:0;background:rgba(2,6,20,0.8);display:none;align-items:center;justify-content:center;z-index:999">
+        <div style="max-width:900px;width:90%;border-radius:12px;overflow:hidden;background:#07102a;padding:18px;position:relative">
+            <button id="modalClose" style="position:absolute;right:12px;top:12px;background:transparent;border:0;color:var(--muted);font-size:20px">✕</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Utils
+        const $ = (s, el=document)=>el.querySelector(s);
+        const $$ = (s, el=document)=>Array.from(el.querySelectorAll(s));
+
+        // Cursor
+        const cursor = document.getElementById('cursor');
+        if (window.matchMedia('(pointer:fine)').matches) {
+            cursor.style.display = 'block';
+            document.addEventListener('mousemove', e=>{
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.addEventListener('mousedown', ()=>{cursor.style.transform='translate(-50%,-50%) scale(0.84)';});
+            document.addEventListener('mouseup', ()=>{cursor.style.transform='translate(-50%,-50%) scale(1)';});
+            $$('button, a, .btn').forEach(el=>{
+                el.addEventListener('mouseenter', ()=>{cursor.style.width='72px';cursor.style.height='72px';})
+                el.addEventListener('mouseleave', ()=>{cursor.style.width='42px';cursor.style.height='42px';})
+            });
+        }
+
+        // Particles (simple)
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        let W, H, particles=[];
+        function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
+        window.addEventListener('resize', resize); resize();
+        function initParticles(){
+            particles=[]; for(let i=0;i<60;i++){particles.push({
+                x:Math.random()*W,y:Math.random()*H,
+                vx:(Math.random()-0.5)*0.3,vy:(Math.random()-0.5)*0.3,
+                r:Math.random()*1.6+0.6, hue:200+Math.random()*60
+            })}}
+        initParticles();
+        function step(){
+            ctx.clearRect(0,0,W,H);
+            for(const p of particles){
+                p.x+=p.vx; p.y+=p.vy;
+                if(p.x<0)p.x=W; if(p.x>W)p.x=0;
+                if(p.y<0)p.y=H; if(p.y>H)p.y=0;
+                const g = ctx.createRadialGradient(p.x,p.y,p.r,p.x,p.y,p.r*20);
+                g.addColorStop(0, 'rgba(122,111,229,0.24)'); g.addColorStop(1,'transparent');
+                ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*12,0,Math.PI*2); ctx.fill();
+            }
+            requestAnimationFrame(step);
+        }
+        step();
+
+        // Typing subtitle
+        (function(){
+            const el = document.getElementById('typingSub'); const strings = ['Web Developer • Graphic Designer • Startup Founder','Creative Technologist • Illustrator • Video Editor'];
+            let i=0,j=0,forward=true;
+            function tick(){
+                const str = strings[i];
+                el.textContent = str.slice(0,j) + (forward? '': '');
+                if(forward){ j++; if(j>str.length){ forward=false; setTimeout(()=>forward=false,700); setTimeout(()=>{forward=false},700)}}
+                if(!forward){ j--; if(j<=0){ forward=true;i=(i+1)%strings.length; j=0; }}
+                setTimeout(tick, forward?45:25);
+            }
+            tick();
+        })();
+
+        // Smooth scroll
+        document.querySelectorAll('[data-scroll]').forEach(btn=>{
+            btn.addEventListener('click', e=>{
+                e.preventDefault(); const sel = btn.getAttribute('data-scroll'); document.querySelector(sel).scrollIntoView({behavior:'smooth'});
+            })
+        });
+
+        // Nav mobile
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', ()=>{
+            const open = navLinks.style.display !== 'flex';
+            navLinks.style.display = open ? 'flex' : 'none';
+            menuBtn.setAttribute('aria-expanded', String(open));
+        });
+
+        // Intersection observer for in-view animations & active nav
+        const sections = $$('section');
+        const observer = new IntersectionObserver(entries=>{
+            entries.forEach(e=>{
+                const id = e.target.id;
+                if(e.isIntersecting){
+                    e.target.classList.add('in-view');
+                    // active nav link
+                    $$('.nav-link').forEach(a=>a.classList.toggle('active', a.getAttribute('href') === '#'+id));
+                }
+            })
+        }, {threshold:0.18});
+        sections.forEach(s=>observer.observe(s));
+
+        // Fade-up elements
+        $$('.fade-up').forEach(el=>{
+            el.classList.add('fade-up');
+            // reveal when in view via separate observer
+        });
+
+        // Counters
+        const counters = $$('.counter');
+        const countObs = new IntersectionObserver(entries=>{
+            entries.forEach(entry=>{
+                if(entry.isIntersecting){
+                    const el = entry.target;
+                    const target = +el.dataset.target;
+                    let n=0; const step = Math.max(1, Math.floor(target/80));
+                    const t = setInterval(()=>{ n+=step; el.textContent = n; if(n>=target){ el.textContent=target; clearInterval(t); } }, 18);
+                    countObs.unobserve(el);
+                }
+            });
+        }, {threshold:0.5});
+        counters.forEach(c=>countObs.observe(c));
+
+        // Skill progress bars animate on view
+        const progs = $$('[data-value]');
+        const progObs = new IntersectionObserver(entries=>{
+            entries.forEach(en=>{
+                if(en.isIntersecting){
+                    const i = en.target; i.style.width = i.dataset.value + '%';
+                    progObs.unobserve(i);
+                }
+            });
+        }, {threshold:0.25});
+        progs.forEach(p=>progObs.observe(p));
+
+        // Modal for project details
+        const modal = $('#modal'); const modalContent = $('#modalContent');
+        $$('.project-card').forEach(card=>{
+            card.querySelectorAll('.btn').forEach(b=>{
+                b.addEventListener('click', (e)=>{
+                    e.preventDefault();
+                    const title = card.dataset.title || 'Project';
+                    modalContent.innerHTML = '<h3 style="font-family:Montserrat">'+title+'</h3><p style="color:var(--muted)">Detailed case study preview — interactive demo and assets coming soon.</p>';
+                    modal.style.display='flex'; modal.setAttribute('aria-hidden','false');
+                })
+            });
+        });
+        $('#modalClose').addEventListener('click', ()=>{modal.style.display='none'; modal.setAttribute('aria-hidden','true')});
+        modal.addEventListener('click', e=>{ if(e.target===modal) modal.style.display='none' });
+
+        // Gallery lightbox basic
+        document.getElementById('galleryGrid').addEventListener('click', e=>{
+            const img = e.target.closest('img');
+            if(!img) return;
+            modalContent.innerHTML = '<img src="'+img.src.replace('width=\'','width=')+'" style="width:100%;border-radius:8px"/>';
+            modal.style.display='flex'; modal.setAttribute('aria-hidden','false');
+        });
+
+        // Gallery filters
+        document.querySelectorAll('[data-filter]').forEach(btn=>{
+            btn.addEventListener('click', ()=>{
+                const f = btn.getAttribute('data-filter');
+                $$('#galleryGrid .g-item').forEach(item=>{
+                    item.style.display = (f==='*' || item.dataset.cat===f) ? 'block' : 'none';
+                });
+            });
+        });
+
+        // Testimonials slider
+        (function(){
+            const slider = document.getElementById('testSlider');
+            const slides = $$('.test-slide', slider);
+            let idx = 0;
+            setInterval(()=>{ idx = (idx+1)%slides.length; slides.forEach((s,i)=>s.style.transform = `translateX(${(i-idx)*100}%)`); }, 4200);
+        })();
+
+        // Contact form (simulate)
+        document.getElementById('contactForm').addEventListener('submit', e=>{
+            e.preventDefault();
+            const btn = document.querySelector('.send-btn'); const label = $('#sendLabel');
+            btn.classList.add('sent'); label.textContent='Sending...';
+            setTimeout(()=>{ label.textContent='Message Sent'; btn.classList.remove('sent'); btn.style.pointerEvents='none'; }, 1200);
+        });
+
+        // Download CV (generate simple PDF blob placeholder)
+        document.getElementById('downloadCV').addEventListener('click', e=>{
+            e.preventDefault();
+            const blob = new Blob([`Owen Enock Nyamaropa — CV\n\nWeb Developer • Graphic Designer • Startup Founder\n`], {type:'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href=url; a.download='Owen_Nyamaropa_CV.txt'; document.body.appendChild(a); a.click(); a.remove();
+            URL.revokeObjectURL(url);
+        });
+
+        // Active year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Parallax/Reveal on scroll (basic)
+        window.addEventListener('scroll', ()=>{
+            const sc = pageYOffset;
+            document.querySelectorAll('.hero-right, .device').forEach(el=>{
+                el.style.transform = `translateY(${sc*0.02}px)`;
+            });
+        });
+
+        // Theme toggle (dark/light)
+        document.getElementById('themeToggle').addEventListener('click', ()=>{
+            document.body.classList.toggle('light-mode');
+            if(document.body.classList.contains('light-mode')){
+                document.body.style.background = 'linear-gradient(180deg,#f7f8fb,#eef2ff)';
+                document.body.style.color = '#08102f';
+            } else {
+                document.body.style.background = 'linear-gradient(180deg,#050716,#07102a)';
+                document.body.style.color = '';
+            }
+        });
+
+        // Accessibility: keyboard focus
+        document.addEventListener('keyup', e=>{
+            if(e.key==='Escape') modal.style.display='none';
+        });
+
+        // Basic reveal for elements marked fade-up when intersecting
+        const revealObs = new IntersectionObserver(entries=>{
+            entries.forEach(en=>{
+                if(en.isIntersecting) en.target.classList.add('in-view');
+            });
+        }, {threshold:0.18});
+        document.querySelectorAll('.fade-up').forEach(el=>revealObs.observe(el));
+    </script>
+</body>
+</html>
